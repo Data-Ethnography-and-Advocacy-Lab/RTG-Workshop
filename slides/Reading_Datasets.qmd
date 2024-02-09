@@ -1,0 +1,124 @@
+---
+title: "Reading Datasets"
+author: |
+  Lindsay Poirier<br/>
+  </span>
+  <span style = 'font-size: 70%;'>
+  [Statistical & Data Sciences](http://www.smith.edu/sds), Smith College<br/>
+date: |
+  February 12, 2024<br/>
+format: 
+  revealjs:
+    scrollable: true
+    df-print: paged
+    theme: [default]
+    chalkboard:
+      theme: whiteboard
+      boardmarker-width: 5
+editor: source
+execute:
+  echo: false
+  messages: false
+  warnings: false
+---
+
+
+
+# What is a dataset? {.smaller}
+
+::: columns
+::: {.column width="40%"}
+![](https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png)
+
+Grolemund, Garrett, and Hadley Wickham. n.d. R for Data Science. Accessed March 31, 2019. https://r4ds.had.co.nz/.
+:::
+
+::: {.column width="60%"}
+-   a collection of data points organized into a structured format
+-   we can refer to 2-dimensional datasets as *rectangular* datasets
+-   rectangular datasets are organized into a series of rows and columns; ideally:
+    -   we refer to rows as *observations*
+    -   we refer to columns as *variables*
+:::
+:::
+
+------------------------------------------------------------------------
+
+## Observations vs. Variables vs. Values {.smaller}
+
+::: columns
+::: {.column width="70%"}
+::: panel-tabset
+### Observations
+
+::: nonincremental
+-   Observations refer to individual units or cases of the data being collected.
+    -   If I was collecting data about each student in a course, one student would be an observation.
+    -   If I was collecting census data and aggregating it at the city level, one city would be an observation.
+:::
+
+### Variables
+
+::: nonincremental
+-   Variables describe something about an observation.
+    -   If I was collecting data about each student in a course, 'age' might be one variable.
+    -   If I was collecting city-level census data, 'population' might be one variable.
+:::
+
+### Values
+
+::: nonincremental
+-   Values refer to the actual value associated with a variable for a given observation.
+    -   If I was collecting data about each student's age in a course, one value might be 20.
+:::
+:::
+:::
+
+::: {.column width="30%"}
+![](https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png)
+
+Grolemund, Garrett, and Hadley Wickham. n.d. R for Data Science. Accessed March 31, 2019. https://r4ds.had.co.nz/.
+:::
+:::
+
+------
+
+## Units of Observation
+
+- Represent the unit at which data is recorded or aggregated
+- "Each row in the dataset represents a ________."
+- Defintions determine "what counts" as a relevant unit
+
+------------------------------------------------------------------------
+
+## Types of Variables
+
+| Categorical Variables                                                             | Numeric Variables                                                               |
+|------------------------------------|------------------------------------|
+| Named or classified labels (e.g. names, zip codes, hair color) | Counted Variables (e.g. number of students in this class) |
+| Ordered labels (e.g. letter grades, pollution levels)          | Measured variables (e.g. temperature, height)             |
+
+
+-------
+
+# Raise your hand if you are wearing a blue shirt. 
+
+---
+
+## Query a Dataset: What counts?
+
+- For each unit of observation and variable ask:
+  - What is the formal definition or standard for this observation or variable? (Denotative Reading)
+  - What is the social history of this definition of standard? (Connotative Reading)
+  - What relevant information is excluded due to the scope of this definition or variable? (Deconstructive Reading)
+  
+---
+
+## Where can I find this information?
+
+- Data documentation
+- Methodology/FAQ
+- News articles, and opinion pieces 
+  - Google: "what counts as a _____"s
+
+

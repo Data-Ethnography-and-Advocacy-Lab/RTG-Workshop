@@ -1,0 +1,118 @@
+---
+title: "Data Ideologies"
+author: |
+  Lindsay Poirier<br/>
+  </span>
+  <span style = 'font-size: 70%;'>
+  [Statistical & Data Sciences](http://www.smith.edu/sds), Smith College<br/>
+date: |
+  February 12, 2024<br/>
+format: 
+  revealjs:
+    scrollable: true
+    df-print: paged
+    theme: [default]
+    chalkboard:
+      theme: whiteboard
+      boardmarker-width: 5
+editor: source
+execute:
+  echo: false
+  messages: false
+  warnings: false
+---
+
+
+## What are data ideologies?
+
+-   A set of assumptions and understandings that frame discourse around data
+-   Sometimes tacit and sometimes explicit
+-   Often observed through forms of *advocacy*
+
+::: notes
+note that discourse and ideology are different - beliefs shape the way we talk about data and the way we talk about data shape beliefs - in many cases, ethnographers only have access to discourse - the way we talk about data.
+
+explicit - knowingly put forth certain beliefs and understandings around data tacit - sometimes need to read between the lines to get at these belief systems (example: noting that "nature metaphors" leave out the human)
+
+-   advocacy - when people perform ethics in anticipation of a particular future
+-   examine sites where people stake claims or act in accordance with beliefs around what data should be or look like
+:::
+
+------------------------------------------------------------------------
+
+## What assumptions and understandings of data can we examine?
+
+|                                    |                                                      |
+|-----------------------------|-------------------------------------------|
+| Epistemic beliefs about data       | what is data's relationship with knowledge and truth |
+| Language ideologies around data    | how does data fix/create meaning                     |
+| Commitments to data perspectives   | whose perspectives should data represent             |
+| Data imaginaries and value regimes | how and why are data valued                          |
+
+::: {.notes}
+- not comprehensive list but gives us insight
+:::
+------------------------------------------------------------------------
+
+## How do we study data ideologies?
+
+-   Ethnographically examine sites of data constitution, contestation, and advocacy
+-   May involve participant observation, interviewing, or bringing an ethnographic sensibility to the data "archive"
+-   May involve examining how assumptions and understandings materialize in a dataset's form
+
+::: notes
+- can be difficult because of access; this is one reason why I tend to focus on datasets in the public domain
+- 
+
+:::
+
+------------------------------------------------------------------------
+
+## Epistemic Beliefs about Data
+
+> what is data's relationship with knowledge and truth
+
+-   Role of numbers in representing reality
+-   Beliefs about data's origins and originary forms
+-   Understandings of data's relationship with nature and culture
+
+::: {.notes}
+
+- data hype suggested that numbers might be able to "speak for themselves"
+- ethno shows very few people really believe this 
+- implicit
+- still nature metaphors suggest that data comes from nowhere - "raw data" assumes data free of human bias
+- 'good' data often associated with terms related to nature - pure, raw, etc. 
+
+:::
+
+------------------------------------------------------------------------
+
+## Language Ideologies around Data
+
+> how does data fix/create meaning
+
+-   Belief about when and how meaning of data stabilizes
+-   Role of knowledge infrastructures in fixing meaning
+
+------------------------------------------------------------------------
+
+## Commitments to Data Perspectives
+
+> whose perspectives should data represent
+
+-   Recognition of data labor
+-   Beliefs about whose perspectives should underpin and mobilize the data
+
+------------------------------------------------------------------------
+
+## Data Imaginaries and Value Regimes
+
+> how and why are data valued
+
+-   Beliefs about the promise of data availability/openness
+-   Beliefs about the threats data poses to collective value systems
+-   Ambivalences regarding the value of data
+
+
+

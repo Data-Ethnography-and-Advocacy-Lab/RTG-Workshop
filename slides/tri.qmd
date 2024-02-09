@@ -1,0 +1,66 @@
+---
+title: "Toxic Release Inventory"
+author: |
+  Lindsay Poirier<br/>
+  </span>
+  <span style = 'font-size: 70%;'>
+  [Statistical & Data Sciences](http://www.smith.edu/sds), Smith College<br/>
+date: |
+  February 12, 2024<br/>
+format: 
+  revealjs:
+    scrollable: true
+    df-print: paged
+    theme: [default]
+    chalkboard:
+      theme: whiteboard
+      boardmarker-width: 5
+editor: source
+execute:
+  echo: false
+  messages: false
+  warnings: false
+---
+
+
+## Origins of the Toxic Release Inventory
+
+-   December 4, 1984: methyl isocyanate gas leaked from Union Carbide Chemical plant
+Thousands died that night and thousands died later due to exposure
+-   1985: Similar plant in West Virginia
+-   1986: Emergency Planning and Community Right to Know Act mandated annual TRI reporting
+
+-----------
+
+## Toxic Release Inventory
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+-   A dataset published yearly by the EPA 
+-   Lists the amounts of toxic chemicals released (into the air, water, or soil) and/or managed from U.S. industrial facilities
+
+
+:::
+
+::: {.column width="50%"}
+
+![](https://www.epa.gov/sites/production/files/2013-06/trimockup.jpg)
+[Link to Interactive Diagram](https://www.epa.gov/toxics-release-inventory-tri-program/look-inside-tri-facility)
+:::
+:::
+
+-----------------
+
+![](img/tri_does.png)
+
+-----------------
+
+![](https://www.epa.gov/system/files/styles/huge/private/images/2022-02/tri_factors_influence_risk.jpg?itok=zW_dfRsD)
+
+-----------------
+
+![](https://www.epa.gov/sites/default/files/2017-09/dq_diagram_for_webpage.jpg)
+
+-----------------

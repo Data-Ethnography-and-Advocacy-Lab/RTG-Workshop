@@ -1,0 +1,54 @@
+---
+title: "Data Journeys"
+author: |
+  Lindsay Poirier<br/>
+  </span>
+  <span style = 'font-size: 70%;'>
+  [Statistical & Data Sciences](http://www.smith.edu/sds), Smith College<br/>
+date: |
+  February 12, 2024<br/>
+format: 
+  revealjs:
+    scrollable: true
+    df-print: paged
+    theme: [default]
+    chalkboard:
+      theme: whiteboard
+      boardmarker-width: 5
+editor: source
+execute:
+  echo: false
+  messages: false
+  warnings: false
+---
+
+
+
+# Bates, Jo, Yu-Wei Lin, and Paula Goodale. 2016. “Data Journeys: Capturing the Socio-Material Constitution of Data Objects and Flows.” *Big Data & Society* 3 (2) [https://doi.org/10.1177/2053951716654502](https://doi.org/10.1177/2053951716654502).
+
+------
+
+## Premises: The Life of Data
+
+-   Data move through various sites of data practice (conceptualization, production, analysis, use, etc)
+-   Data is socially constituted at each of these different sites
+-   Data has material-semiotic qualities, moving within physical spaces
+
+------------------------------------------------------------------------
+
+## "Journeys" vs. "Flows"
+
+-   Attends to moments of mutability
+-   Recognizes the stopping points, dead ends, frictions
+-   Reminds the ethnographer that they are along for the ride
+
+------------------------------------------------------------------------
+
+## Attending to the Spatial Dynamics of Movement
+
+-   Pathways from Point A to Point B
+-   Time and speed of movement
+-   Moments when data movements are forked or integrated
+-   Frictions of movement
+
+

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lindsay Poirier">
+
+<title>RTG Fixing Futures Data Workshop</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#the-dataset" id="toc-the-dataset" class="nav-link" data-scroll-target="#the-dataset">The Dataset</a></li>
+  <li><a href="#querying-data-ideologies" id="toc-querying-data-ideologies" class="nav-link" data-scroll-target="#querying-data-ideologies">Querying Data Ideologies</a>
+  <ul class="collapse">
+  <li><a href="#discourse-analysis-of-tri-media" id="toc-discourse-analysis-of-tri-media" class="nav-link" data-scroll-target="#discourse-analysis-of-tri-media">Discourse Analysis of TRI Media</a></li>
+  <li><a href="#structured-analytics" id="toc-structured-analytics" class="nav-link" data-scroll-target="#structured-analytics">Structured Analytics</a></li>
+  </ul></li>
+  <li><a href="#reading-datasets" id="toc-reading-datasets" class="nav-link" data-scroll-target="#reading-datasets">Reading Datasets</a>
+  <ul class="collapse">
+  <li><a href="#get-to-know-this-dataset-structure" id="toc-get-to-know-this-dataset-structure" class="nav-link" data-scroll-target="#get-to-know-this-dataset-structure">Get to Know this Dataset Structure</a></li>
+  <li><a href="#reading-the-tri-dataset" id="toc-reading-the-tri-dataset" class="nav-link" data-scroll-target="#reading-the-tri-dataset">Reading the TRI Dataset</a></li>
+  <li><a href="#structured-analytics-1" id="toc-structured-analytics-1" class="nav-link" data-scroll-target="#structured-analytics-1">Structured Analytics</a></li>
+  </ul></li>
+  <li><a href="#data-journeys" id="toc-data-journeys" class="nav-link" data-scroll-target="#data-journeys">Data Journeys</a>
+  <ul class="collapse">
+  <li><a href="#map-data-movements" id="toc-map-data-movements" class="nav-link" data-scroll-target="#map-data-movements">Map Data Movements</a></li>
+  <li><a href="#design-a-data-journeys-study" id="toc-design-a-data-journeys-study" class="nav-link" data-scroll-target="#design-a-data-journeys-study">Design a Data Journeys Study</a></li>
+  <li><a href="#structured-analytics-2" id="toc-structured-analytics-2" class="nav-link" data-scroll-target="#structured-analytics-2">Structured Analytics</a></li>
+  </ul></li>
+  <li><a href="#expository-data-analysis" id="toc-expository-data-analysis" class="nav-link" data-scroll-target="#expository-data-analysis">Expository Data Analysis</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">RTG Fixing Futures Data Workshop</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Lindsay Poirier </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this workshop, we will practice a series of critical approaches to studying data cultures, infrastructures, and environments.</p>
+</section>
+<section id="the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="the-dataset">The Dataset</h2>
+<p>The United States Environmental Protection Agency’s Emergency Planning and Community Right to Know Act (EPCRA) of 1986 established the Toxic Release Inventory as a mechanism to monitor and inform the public of toxic emissions released in their communities. Every year, certain U.S. industrial facilities are required to report to the EPA the amounts of certain chemical on-site and off-site releases in pounds.</p>
+<ul>
+<li><a href="slides/tri.html">Link to Slides</a></li>
+<li><a href="https://thru.de/en/thrude/about-thrude/prtr-in-germany-and-the-eu/">Public Release Transfer Program in Germany</a></li>
+</ul>
+</section>
+<section id="querying-data-ideologies" class="level2">
+<h2 class="anchored" data-anchor-id="querying-data-ideologies">Querying Data Ideologies</h2>
+<ul>
+<li><a href="slides/Data_Ideologies.html">Link to Slides</a></li>
+<li><a href="https://jamboard.google.com/d/1E9kGqIwdi3y6X_KAbeNYUYMhqdy3yxQizLUl4AwOmh0/edit?usp=sharing">Link to Collaborative Workspace</a></li>
+</ul>
+<section id="discourse-analysis-of-tri-media" class="level3">
+<h3 class="anchored" data-anchor-id="discourse-analysis-of-tri-media">Discourse Analysis of TRI Media</h3>
+<ul>
+<li><iframe width="560" height="315" src="https://www.youtube.com/embed/Fqjh6t6Hx6s?si=ZNmHBRMTTcM76akz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="">
+</iframe></li>
+<li><a href="https://web.archive.org/web/20201031172204/https://publicintegrity.org/environment/epas-toxics-release-inventory-doesnt-offer-full-picture-of-pollution/">EPA’S Toxics Release Inventory Doesn’t Offer Full Picture of Pollution</a></li>
+</ul>
+</section>
+<section id="structured-analytics" class="level3">
+<h3 class="anchored" data-anchor-id="structured-analytics">Structured Analytics</h3>
+<table class="table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 28%">
+<col style="width: 24%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Theme</strong></th>
+<th><strong>Analytic Question</strong></th>
+<th><strong>Example Statement</strong></th>
+<th><strong>Possible Analysis</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Epistemic Beliefs about Data</td>
+<td>How does this community understand the relationship between numbers and truth?</td>
+<td>With enough data, numbers can speak for themselves.</td>
+<td>Presumes truth is intrinsic to numbers.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>How does this community characterize data origins or originary forms? Where do they suggest that data comes from?</td>
+<td>Data is taken, not given.</td>
+<td>Counters the assumption that data comes from nowhere.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>What analogies or metaphors does this community engage to characterize what data is or what data is like?</td>
+<td>Data is the new oil.</td>
+<td>Presumes data to be a natural resource that is extractable.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>How does this community frame the role of culture and bias when evaluating data?</td>
+<td>We need to work to eliminate the biases that people bring to data collection.</td>
+<td>Presumes that distancing human opinion makes better data.</td>
+</tr>
+<tr class="odd">
+<td>Language Ideologies around Data</td>
+<td>What does this community believe about when, how, and through what mechanisms the meaning of data stabilizes?</td>
+<td>Data is not meaningful without context.</td>
+<td>Presumes that recording background information can help to secure the meaning of data.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>What does this community believe about the role of knowledge infrastructures in stabilizing meaning?</td>
+<td>Data is meaningless without standardized definitions.</td>
+<td>Presumes that data is more meaningful when tethered to a single definition.</td>
+</tr>
+<tr class="odd">
+<td>Commitments to Data Perspectives</td>
+<td>How does this community acknowledge the humans involved in the production of this data?</td>
+<td>Automated sensors produce raw data, free from human bias.</td>
+<td>Ignores the human labor involved in configuring sensors.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>How does this community determine who or what should count in this data, and how they should count?</td>
+<td>Racial categories should be disaggregated to better represent a diversity of voices in the data.</td>
+<td>Suggests that data should be more representative of diversity.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Whose perspectives does this community believe should frame the data?</td>
+<td>Data collection and interpretation should be left to the experts.</td>
+<td>Suggests a belief that data should fall under the purview of those deemed to have “credibility.”</td>
+</tr>
+<tr class="even">
+<td>Data Imaginaries and Value Regimes</td>
+<td>What does data access/openness promise in this community?</td>
+<td>Making data publicly available promotes transparency and accountability.</td>
+<td>Suggests that data can promote behaviors deemed to be more socially responsible.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>In what ways does data threaten collective values in this community?</td>
+<td>Publishing data poses risks to privacy.</td>
+<td>Suggests that data poses harm to individual rights.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>What does this community believe about how data should be governed/cared for?</td>
+<td>Investments need to be made in data stewardship.</td>
+<td>Suggests data is an asset deserving of care and attention.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>How does this community navigate ambivalences regarding the value of data?</td>
+<td>We have to creatively engage data to undermine the way data have been used against us.</td>
+<td>Suggests that power can be reclaimed through data.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="reading-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="reading-datasets">Reading Datasets</h2>
+<ul>
+<li><a href="slides/Reading_Datasets.html">Link to Slides</a></li>
+<li><a href="https://jamboard.google.com/d/1SHtkAwiV-mCugXPsjLuZxhuk6G4jBGvIAG-CpUjyOUY/edit?usp=sharing">Link to Collaborative Workspace</a></li>
+</ul>
+<section id="get-to-know-this-dataset-structure" class="level3">
+<h3 class="anchored" data-anchor-id="get-to-know-this-dataset-structure">Get to Know this Dataset Structure</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 19%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><p>Cols 2-33</p>
+<p>Facility</p></th>
+<th><p>Cols 34-44</p>
+<p>_______</p></th>
+<th><p>Cols 46-47</p>
+<p>Collection</p></th>
+<th><p>Cols 48-62</p>
+<p>_____</p></th>
+<th><p>Cols 63-103</p>
+<p>_____</p></th>
+<th>Col 104 _____</th>
+<th><p>Cols 105-119</p>
+<p>_____</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Now open the <a href="https://www.epa.gov/system/files/documents/2022-10/TRI_Basic_Data_File_Documentation_RY2021_102522.pdf">data dictionary</a> for this dataset. Note that columns 2-33 in this dataset all document information about the facility. Can you figure out what columns 34-44 document information about? What about the other blanks in my table above? What two columns are needed to uniquely identify each row?</p>
+</section>
+<section id="reading-the-tri-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="reading-the-tri-dataset">Reading the TRI Dataset</h3>
+<p>Definitions have long been a subject of contention when it comes to the TRI. The data has been shaped by a series of laws, political agendas, scientific advancements, and social movements implicating the data’s definitions. In this activity, in groups, you are going to examine data documentation and other sources in order to read this dataset denotatively, connotatively, and deconstructively.</p>
+<section id="group-1-what-counts-as-a-facility" class="level4">
+<h4 class="anchored" data-anchor-id="group-1-what-counts-as-a-facility">Group 1: What counts as a facility?</h4>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Hint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When engaging the connotative reading, you may wish to look up information on a <a href="https://www.regulations.gov/docket/EPA-HQ-TRI-2005-0020/document">1997 final rule</a>, expanding industry sectors.</p>
+</div>
+</div>
+</section>
+<section id="group-2-what-counts-as-a-chemical" class="level4">
+<h4 class="anchored" data-anchor-id="group-2-what-counts-as-a-chemical">Group 2: What counts as a chemical?</h4>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Hint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When engaging the connotative reading, you may wish to look up information on the <a href="https://www.regulations.gov/document/EPA-HQ-TRI-2022-0270-0001">addition of PFAS to the TRI</a>.</p>
+</div>
+</div>
+</section>
+<section id="group-3-what-counts-as-a-release" class="level4">
+<h4 class="anchored" data-anchor-id="group-3-what-counts-as-a-release">Group 3: What counts as a release?</h4>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Hint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When engaging the connotative reading, you may wish to look up information on the <a href="https://www.regulations.gov/docket/EPA-HQ-TRI-2005-0073/document">TRI Burden Reduction Rule</a>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="structured-analytics-1" class="level3">
+<h3 class="anchored" data-anchor-id="structured-analytics-1">Structured Analytics</h3>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 83%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Theme</strong></th>
+<th><strong>Analytic Question</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Semiotics</td>
+<td>What is the unit of observation in this dataset? In this dataset, each row is a _____.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>How is the unit of observation formally/technically defined? How does it get defined in the data documentation?</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>What is the social history of the unit of observation’s definition? How do social groups talk about this definition? How has it been contested?</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>What potentially relevant information is excluded from representation due to the scope of the unit of observation’s definition?</td>
+</tr>
+<tr class="odd">
+<td>Categories</td>
+<td>How do concepts get divided for one primary categorical variable in the dataset? What are the possible terms?</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>What is the social history of the classification system dividing a categorical variable in the dataset? How do social groups talk about this classification system? How has it been contested?</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>What people or things that might not fit neatly into the categories in a categorical variable in the dataset?</td>
+</tr>
+<tr class="even">
+<td>Counts</td>
+<td>For one count variable in the dataset, according to what definition are things counted?</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Through what social processes were the definitions for one count variable in the dataset agreed upon?</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>What potentially relevant information is excluded from representation due to the scope of the counted variable’s definition?</td>
+</tr>
+<tr class="odd">
+<td>Measurements</td>
+<td>For one measured variable in the dataset, according to what standards are things measured?</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Through what social processes were the standards for one measurement variable in the dataset agreed upon?</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>What potentially relevant information is excluded from representation due to the scope of the measured variable’s standards?</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="data-journeys" class="level2">
+<h2 class="anchored" data-anchor-id="data-journeys">Data Journeys</h2>
+<ul>
+<li><a href="slides/Data_Journeys.html">Link to Slides</a></li>
+<li><a href="https://web.archive.org/web/20161205211725/https://lifeofdata.org.uk/node/met-office/">Archived Life of Data Website</a></li>
+<li>Link to <a href="https://jamboard.google.com/d/1ns0NYxbGHsHVNLAe3VS_cC7r1XmixHydeqh3qv0MF60/edit?usp=sharing">Collaborative Workspace</a></li>
+</ul>
+<section id="map-data-movements" class="level3">
+<h3 class="anchored" data-anchor-id="map-data-movements">Map Data Movements</h3>
+<ul>
+<li><a href="https://www.epa.gov/toxics-release-inventory-tri-program/basics-tri-reporting">TRI Reporting Basics</a></li>
+<li><a href="https://www.epa.gov/sites/default/files/documents/tri_in_action_final_report_july_2013.pdf">TRI in Action Report</a></li>
+<li><a href="https://www.epa.gov/toxics-release-inventory-tri-program/catalog-applied-tri-data-uses">TRI Data Uses Catalog</a></li>
+</ul>
+</section>
+<section id="design-a-data-journeys-study" class="level3">
+<h3 class="anchored" data-anchor-id="design-a-data-journeys-study">Design a Data Journeys Study</h3>
+<ul>
+<li>What <strong>research question</strong> will motivate your study?</li>
+<li>What is the <strong>aim</strong> of your study?</li>
+<li>What are your research <strong>methods</strong> and <strong>activities</strong>?</li>
+<li>What is the <strong>scholarly significance</strong> of your study?</li>
+<li>What is the <strong>societal impact</strong> of your study?</li>
+</ul>
+</section>
+<section id="structured-analytics-2" class="level3">
+<h3 class="anchored" data-anchor-id="structured-analytics-2">Structured Analytics</h3>
+<table class="table">
+<colgroup>
+<col style="width: 100%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Analytic Question</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>At which sites are these data constituted/re-constituted?</td>
+</tr>
+<tr class="even">
+<td>In what ways do these data mutate as they travel from site-to-site?</td>
+</tr>
+<tr class="odd">
+<td>How would you characterize the speed and timing of the data’s journeys?</td>
+</tr>
+<tr class="even">
+<td>Where can you identify friction in the data’s journeys?</td>
+</tr>
+<tr class="odd">
+<td>At what moments are the data’s journeys forked down new pathways?</td>
+</tr>
+<tr class="even">
+<td>At what moments do the data’s journeys converge?</td>
+</tr>
+<tr class="odd">
+<td>What are the end points in the data’s journeys?</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="expository-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="expository-data-analysis">Expository Data Analysis</h2>
+<ul>
+<li>Examining the controlling of vocabularies</li>
+<li>Examining semantic change</li>
+<li>Examining human labor and error</li>
+<li>Examining geographies of ignorance</li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

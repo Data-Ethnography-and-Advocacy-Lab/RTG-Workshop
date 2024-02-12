@@ -185,7 +185,6 @@ rmarkdown::paged_table(tri |> head(10))
 ```
 
 ```{r}
-#| echo: false
 #| df_print: paged
 #| warning: false
 #| message: false
@@ -201,7 +200,6 @@ tri |>
 ### Earliest Years Each Chemical was Reported after 1997
 
 ```{r}
-#| echo: false
 #| df_print: paged
 #| warning: false
 #| message: false
@@ -218,7 +216,6 @@ rmarkdown::paged_table(tri |>
 ### Number of Reports per Form Type Over Time
 
 ```{r}
-#| echo: false
 #| df_print: paged
 #| warning: false
 #| message: false
@@ -234,7 +231,6 @@ tri |>
 ### Facilities Reporting Emissions One Year and No Emissions the Following Year
 
 ```{r}
-#| echo: false
 #| df_print: paged
 #| warning: false
 #| message: false

@@ -160,6 +160,8 @@ When engaging the connotative reading, you may wish to look up information on th
 
 ## Expository Data Analysis
 
+> How can we computationally visualize the social constitution of data?
+
 ```{r}
 #| echo: false
 #| df_print: paged
@@ -170,15 +172,39 @@ library(tidyverse)
 library(sf)
 
 tri <- read.csv("data/tri.csv")
+```
 
+### Overview of the Dataset
+
+```{r}
+#| echo: false
+#| df_print: paged
+#| warning: false
+#| message: false
 rmarkdown::paged_table(tri |> head(10))
+```
+
+```{r}
+#| echo: false
+#| df_print: paged
+#| warning: false
+#| message: false
 
 tri |>
   ggplot(aes(x = X1..YEAR)) + 
   geom_bar() + 
   facet_wrap(vars(X16..INDUSTRY.SECTOR))  +
-  theme_minimal()
+  theme_minimal() +
+  labs(x = "Year", y = "Count of Release Reports")
+```
 
+### Earliest Years Each Chemical was Reported after 1997
+
+```{r}
+#| echo: false
+#| df_print: paged
+#| warning: false
+#| message: false
 rmarkdown::paged_table(tri |>
   group_by(X30..CHEMICAL) |>
   filter(X1..YEAR ==  min(X1..YEAR)) |>
@@ -187,13 +213,33 @@ rmarkdown::paged_table(tri |>
   select(X1..YEAR, X30..CHEMICAL) |>
   distinct() |>
   arrange(X1..YEAR, X30..CHEMICAL))
+```
 
+### Number of Reports per Form Type Over Time
+
+```{r}
+#| echo: false
+#| df_print: paged
+#| warning: false
+#| message: false
 tri |>
   group_by(X1..YEAR, X38..FORM.TYPE) |>
   summarize(count = n()) |>
   ggplot(aes(x = X1..YEAR, y = count, col = X38..FORM.TYPE, group = X38..FORM.TYPE)) +
   geom_line()  +
-  theme_minimal()
+  theme_minimal() +
+  labs(x = "Year", y = "Number of Reports", col = "Form Type")
+```
+
+### Facilities Reporting Emissions One Year and No Emissions the Following Year
+
+```{r}
+#| echo: false
+#| df_print: paged
+#| warning: false
+#| message: false
+
+options(scipen = 999)
 
 rmarkdown::paged_table(tri |>
   filter(X39..UNIT.OF.MEASURE == "Pounds") |>
@@ -203,11 +249,13 @@ rmarkdown::paged_table(tri |>
   arrange(desc(X1..YEAR)) |>
   group_by(X4..FACILITY.NAME) |>
   mutate(
-    previous = lag(releases, default = 0),
-    diff_from_prev = releases - lag(releases, default = 0)) |>
+    previous = round(lag(releases, default = 0)),
+    diff_from_prev = round(releases - lag(releases, default = 0))) |>
   ungroup() |>
   filter(releases == 0) |>
   arrange(desc(abs(diff_from_prev))))
 ```
+
+
 
 

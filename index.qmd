@@ -161,34 +161,41 @@ When engaging the connotative reading, you may wish to look up information on th
 ## Expository Data Analysis
 
 ```{r}
-#| include: false
+#| echo: false
+#| df_print: paged
+#| warning: false
+#| message: false
 
 library(tidyverse)
 library(sf)
 
 tri <- read.csv("data/tri.csv")
 
+rmarkdown::paged_table(tri |> head(10))
+
 tri |>
   ggplot(aes(x = X1..YEAR)) + 
   geom_bar() + 
-  facet_wrap(vars(X16..INDUSTRY.SECTOR))
+  facet_wrap(vars(X16..INDUSTRY.SECTOR))  +
+  theme_minimal()
 
-tri |>
+rmarkdown::paged_table(tri |>
   group_by(X30..CHEMICAL) |>
   filter(X1..YEAR ==  min(X1..YEAR)) |>
   ungroup() |>
   filter(X1..YEAR > 1997) |>
   select(X1..YEAR, X30..CHEMICAL) |>
   distinct() |>
-  arrange(X1..YEAR, X30..CHEMICAL)
+  arrange(X1..YEAR, X30..CHEMICAL))
 
 tri |>
   group_by(X1..YEAR, X38..FORM.TYPE) |>
   summarize(count = n()) |>
   ggplot(aes(x = X1..YEAR, y = count, col = X38..FORM.TYPE, group = X38..FORM.TYPE)) +
-  geom_line()
+  geom_line()  +
+  theme_minimal()
 
-tri |>
+rmarkdown::paged_table(tri |>
   filter(X39..UNIT.OF.MEASURE == "Pounds") |>
   group_by(X1..YEAR, X4..FACILITY.NAME) |>
   summarize(releases = sum(X96..TOTAL.RELEASES)) |>
@@ -200,7 +207,7 @@ tri |>
     diff_from_prev = releases - lag(releases, default = 0)) |>
   ungroup() |>
   filter(releases == 0) |>
-  arrange(desc(abs(diff_from_prev))) 
+  arrange(desc(abs(diff_from_prev))))
 ```
 
 

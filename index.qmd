@@ -160,7 +160,47 @@ When engaging the connotative reading, you may wish to look up information on th
 
 ## Expository Data Analysis
 
--   Examining the controlling of vocabularies
--   Examining semantic change
--   Examining human labor and error
--   Examining geographies of ignorance
+```{r}
+#| include: false
+
+library(tidyverse)
+library(sf)
+
+tri <- read.csv("data/tri.csv")
+
+tri |>
+  ggplot(aes(x = X1..YEAR)) + 
+  geom_bar() + 
+  facet_wrap(vars(X16..INDUSTRY.SECTOR))
+
+tri |>
+  group_by(X30..CHEMICAL) |>
+  filter(X1..YEAR ==  min(X1..YEAR)) |>
+  ungroup() |>
+  filter(X1..YEAR > 1997) |>
+  select(X1..YEAR, X30..CHEMICAL) |>
+  distinct() |>
+  arrange(X1..YEAR, X30..CHEMICAL)
+
+tri |>
+  group_by(X1..YEAR, X38..FORM.TYPE) |>
+  summarize(count = n()) |>
+  ggplot(aes(x = X1..YEAR, y = count, col = X38..FORM.TYPE, group = X38..FORM.TYPE)) +
+  geom_line()
+
+tri |>
+  filter(X39..UNIT.OF.MEASURE == "Pounds") |>
+  group_by(X1..YEAR, X4..FACILITY.NAME) |>
+  summarize(releases = sum(X96..TOTAL.RELEASES)) |>
+  ungroup() |>
+  arrange(desc(X1..YEAR)) |>
+  group_by(X4..FACILITY.NAME) |>
+  mutate(
+    previous = lag(releases, default = 0),
+    diff_from_prev = releases - lag(releases, default = 0)) |>
+  ungroup() |>
+  filter(releases == 0) |>
+  arrange(desc(abs(diff_from_prev))) 
+```
+
+

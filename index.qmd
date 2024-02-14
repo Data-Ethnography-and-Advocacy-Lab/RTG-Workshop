@@ -14,54 +14,68 @@ format:
 
 ## Introduction
 
-In this workshop, we will practice a series of critical approaches to studying data cultures, infrastructures, and environments. 
+In this workshop, we will practice a series of critical approaches to studying data cultures, infrastructures, and environments.
 
-## The Dataset
+## Day One
+
+### The Dataset
 
 The United States Environmental Protection Agency's Emergency Planning and Community Right to Know Act (EPCRA) of 1986 established the Toxic Release Inventory as a mechanism to monitor and inform the public of toxic emissions released in their communities. Every year, certain U.S. industrial facilities are required to report to the EPA the amounts of certain chemical on-site and off-site releases in pounds.
 
 -   [Link to Slides](slides/tri.html)
 -   [Public Release Transfer Program in Germany](https://thru.de/en/thrude/about-thrude/prtr-in-germany-and-the-eu/)
 
-## Querying Data Ideologies
+### Querying Data Ideologies
 
 -   [Link to Slides](slides/Data_Ideologies.html)
 -   [Link to Collaborative Workspace](https://jamboard.google.com/d/1E9kGqIwdi3y6X_KAbeNYUYMhqdy3yxQizLUl4AwOmh0/edit?usp=sharing)
 
-### Discourse Analysis of TRI Media
+#### Discourse Analysis of TRI Media
 
--   <iframe width="560" height="315" src="https://www.youtube.com/embed/Fqjh6t6Hx6s?si=ZNmHBRMTTcM76akz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
--   [EPA’S Toxics Release Inventory Doesn't Offer Full Picture of Pollution](https://web.archive.org/web/20201031172204/https://publicintegrity.org/environment/epas-toxics-release-inventory-doesnt-offer-full-picture-of-pollution/)
+-   <iframe width="560" height="315" src="https://www.youtube.com/embed/Fqjh6t6Hx6s?si=ZNmHBRMTTcM76akz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
 
+    </iframe>
 
-### Structured Analytics
+-   [EPA'S Toxics Release Inventory Doesn't Offer Full Picture of Pollution](https://web.archive.org/web/20201031172204/https://publicintegrity.org/environment/epas-toxics-release-inventory-doesnt-offer-full-picture-of-pollution/)
 
+#### Structured Analytics
+
++------------------------------------+-------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 | **Theme**                          | **Analytic Question**                                                                                             | **Example Statement**                                                                            | **Possible Analysis**                                                                            |
-|----------------|---------------------|------------------|------------------|
++====================================+===================================================================================================================+==================================================================================================+==================================================================================================+
 | Epistemic Beliefs about Data       | How does this community understand the relationship between numbers and truth?                                    | With enough data, numbers can speak for themselves.                                              | Presumes truth is intrinsic to numbers.                                                          |
++------------------------------------+-------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 |                                    | How does this community characterize data origins or originary forms? Where do they suggest that data comes from? | Data is taken, not given.                                                                        | Counters the assumption that data comes from nowhere.                                            |
++------------------------------------+-------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 |                                    | What analogies or metaphors does this community engage to characterize what data is or what data is like?         | Data is the new oil.                                                                             | Presumes data to be a natural resource that is extractable.                                      |
++------------------------------------+-------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 |                                    | How does this community frame the role of culture and bias when evaluating data?                                  | We need to work to eliminate the biases that people bring to data collection.                    | Presumes that distancing human opinion makes better data.                                        |
++------------------------------------+-------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 | Language Ideologies around Data    | What does this community believe about when, how, and through what mechanisms the meaning of data stabilizes?     | Data is not meaningful without context.                                                          | Presumes that recording background information can help to secure the meaning of data.           |
++------------------------------------+-------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 |                                    | What does this community believe about the role of knowledge infrastructures in stabilizing meaning?              | Data is meaningless without standardized definitions.                                            | Presumes that data is more meaningful when tethered to a single definition.                      |
++------------------------------------+-------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 | Commitments to Data Perspectives   | How does this community acknowledge the humans involved in the production of this data?                           | Automated sensors produce raw data, free from human bias.                                        | Ignores the human labor involved in configuring sensors.                                         |
++------------------------------------+-------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 |                                    | How does this community determine who or what should count in this data, and how they should count?               | Racial categories should be disaggregated to better represent a diversity of voices in the data. | Suggests that data should be more representative of diversity.                                   |
++------------------------------------+-------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 |                                    | Whose perspectives does this community believe should frame the data?                                             | Data collection and interpretation should be left to the experts.                                | Suggests a belief that data should fall under the purview of those deemed to have "credibility." |
++------------------------------------+-------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 | Data Imaginaries and Value Regimes | What does data access/openness promise in this community?                                                         | Making data publicly available promotes transparency and accountability.                         | Suggests that data can promote behaviors deemed to be more socially responsible.                 |
++------------------------------------+-------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 |                                    | In what ways does data threaten collective values in this community?                                              | Publishing data poses risks to privacy.                                                          | Suggests that data poses harm to individual rights.                                              |
++------------------------------------+-------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 |                                    | What does this community believe about how data should be governed/cared for?                                     | Investments need to be made in data stewardship.                                                 | Suggests data is an asset deserving of care and attention.                                       |
++------------------------------------+-------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 |                                    | How does this community navigate ambivalences regarding the value of data?                                        | We have to creatively engage data to undermine the way data have been used against us.           | Suggests that power can be reclaimed through data.                                               |
++------------------------------------+-------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
 
-
-
-
-
-## Reading Datasets
+### Reading Datasets
 
 -   [Link to Slides](slides/Reading_Datasets.html)
 -   [Link to Collaborative Workspace](https://jamboard.google.com/d/1SHtkAwiV-mCugXPsjLuZxhuk6G4jBGvIAG-CpUjyOUY/edit?usp=sharing)
 
-### Get to Know this Dataset Structure
+#### Get to Know this Dataset Structure
 
 +-----------+----------------+------------+------------+-------------+--------------------+--------------+
 | Cols 2-33 | Cols 34-44     | Cols 46-47 | Cols 48-62 | Cols 63-103 | Col 104 \_\_\_\_\_ | Cols 105-119 |
@@ -77,11 +91,11 @@ The United States Environmental Protection Agency's Emergency Planning and Commu
 
 Now open the [data dictionary](https://www.epa.gov/system/files/documents/2022-10/TRI_Basic_Data_File_Documentation_RY2021_102522.pdf) for this dataset. Note that columns 2-33 in this dataset all document information about the facility. Can you figure out what columns 34-44 document information about? What about the other blanks in my table above? What two columns are needed to uniquely identify each row?
 
-### Reading the TRI Dataset
+#### Reading the TRI Dataset
 
 Definitions have long been a subject of contention when it comes to the TRI. The data has been shaped by a series of laws, political agendas, scientific advancements, and social movements implicating the data's definitions. In this activity, in groups, you are going to examine data documentation and other sources in order to read this dataset denotatively, connotatively, and deconstructively.
 
-#### Group 1: What counts as a facility?
+##### Group 1: What counts as a facility?
 
 ::: callout-tip
 ## Hint
@@ -89,7 +103,7 @@ Definitions have long been a subject of contention when it comes to the TRI. The
 When engaging the connotative reading, you may wish to look up information on a [1997 final rule](https://www.regulations.gov/docket/EPA-HQ-TRI-2005-0020/document), expanding industry sectors.
 :::
 
-#### Group 2: What counts as a chemical?
+##### Group 2: What counts as a chemical?
 
 ::: callout-tip
 ## Hint
@@ -97,7 +111,7 @@ When engaging the connotative reading, you may wish to look up information on a 
 When engaging the connotative reading, you may wish to look up information on the [addition of PFAS to the TRI](https://www.regulations.gov/document/EPA-HQ-TRI-2022-0270-0001).
 :::
 
-#### Group 3: What counts as a release?
+##### Group 3: What counts as a release?
 
 ::: callout-tip
 ## Hint
@@ -105,37 +119,51 @@ When engaging the connotative reading, you may wish to look up information on th
 When engaging the connotative reading, you may wish to look up information on the [TRI Burden Reduction Rule](https://www.regulations.gov/docket/EPA-HQ-TRI-2005-0073/document).
 :::
 
-### Structured Analytics
+#### Structured Analytics
 
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Theme**    | **Analytic Question**                                                                                                                                                                          |
-|------------|------------------------------------------------------------|
++==============+================================================================================================================================================================================================+
 | Semiotics    | What is the unit of observation in this dataset? In this dataset, each row is a \_\_\_\_\_.                                                                                                    |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |              | How is the unit of observation formally/technically defined? How does it get defined in the data documentation?                                                                                |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |              | What is the social history of the unit of observation's definition? How do social groups talk about this definition? How has it been contested?                                                |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |              | What potentially relevant information is excluded from representation due to the scope of the unit of observation's definition?                                                                |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Categories   | How do concepts get divided for one primary categorical variable in the dataset? What are the possible terms?                                                                                  |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |              | What is the social history of the classification system dividing a categorical variable in the dataset? How do social groups talk about this classification system? How has it been contested? |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |              | What people or things that might not fit neatly into the categories in a categorical variable in the dataset?                                                                                  |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Counts       | For one count variable in the dataset, according to what definition are things counted?                                                                                                        |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |              | Through what social processes were the definitions for one count variable in the dataset agreed upon?                                                                                          |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |              | What potentially relevant information is excluded from representation due to the scope of the counted variable's definition?                                                                   |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Measurements | For one measured variable in the dataset, according to what standards are things measured?                                                                                                     |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |              | Through what social processes were the standards for one measurement variable in the dataset agreed upon?                                                                                      |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |              | What potentially relevant information is excluded from representation due to the scope of the measured variable's standards?                                                                   |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-## Data Journeys
+### Data Journeys
 
 -   [Link to Slides](slides/Data_Journeys.html)
 -   [Archived Life of Data Website](https://web.archive.org/web/20161205211725/https://lifeofdata.org.uk/node/met-office/)
 -   Link to [Collaborative Workspace](https://jamboard.google.com/d/1ns0NYxbGHsHVNLAe3VS_cC7r1XmixHydeqh3qv0MF60/edit?usp=sharing)
 
-### Map Data Movements
+#### Map Data Movements
 
 -   [TRI Reporting Basics](https://www.epa.gov/toxics-release-inventory-tri-program/basics-tri-reporting)
 -   [TRI in Action Report](https://www.epa.gov/sites/default/files/documents/tri_in_action_final_report_july_2013.pdf)
 -   [TRI Data Uses Catalog](https://www.epa.gov/toxics-release-inventory-tri-program/catalog-applied-tri-data-uses)
 
-### Design a Data Journeys Study
+#### Design a Data Journeys Study
 
 -   What **research question** will motivate your study?
 -   What is the **aim** of your study?
@@ -143,22 +171,27 @@ When engaging the connotative reading, you may wish to look up information on th
 -   What is the **scholarly significance** of your study?
 -   What is the **societal impact** of your study?
 
+#### Structured Analytics
 
-### Structured Analytics
-
-| **Analytic Question** |
-|------------------------------------------------------------|
-| At which sites are these data constituted/re-constituted? |
-| In what ways do these data mutate as they travel from site-to-site? |
++-------------------------------------------------------------------------+
+| **Analytic Question**                                                   |
++=========================================================================+
+| At which sites are these data constituted/re-constituted?               |
++-------------------------------------------------------------------------+
+| In what ways do these data mutate as they travel from site-to-site?     |
++-------------------------------------------------------------------------+
 | How would you characterize the speed and timing of the data's journeys? |
-| Where can you identify friction in the data's journeys? |
-| At what moments are the data's journeys forked down new pathways? |
-| At what moments do the data's journeys converge? |
-| What are the end points in the data's journeys? |
++-------------------------------------------------------------------------+
+| Where can you identify friction in the data's journeys?                 |
++-------------------------------------------------------------------------+
+| At what moments are the data's journeys forked down new pathways?       |
++-------------------------------------------------------------------------+
+| At what moments do the data's journeys converge?                        |
++-------------------------------------------------------------------------+
+| What are the end points in the data's journeys?                         |
++-------------------------------------------------------------------------+
 
-
-
-## Expository Data Analysis
+### Expository Data Analysis
 
 > How can we computationally visualize the social constitution of data?
 
@@ -174,7 +207,7 @@ library(sf)
 tri <- read.csv("data/tri.csv")
 ```
 
-### Overview of the Dataset
+#### Overview of the Dataset
 
 ```{r}
 #| echo: false
@@ -197,7 +230,7 @@ tri |>
   labs(x = "Year", y = "Count of Release Reports")
 ```
 
-### Earliest Years Each Chemical was Reported after 1997
+#### Earliest Years Each Chemical was Reported after 1997
 
 ```{r}
 #| df_print: paged
@@ -213,7 +246,7 @@ rmarkdown::paged_table(tri |>
   arrange(X1..YEAR, X30..CHEMICAL))
 ```
 
-### Number of Reports per Form Type Over Time
+#### Number of Reports per Form Type Over Time
 
 ```{r}
 #| df_print: paged
@@ -228,7 +261,7 @@ tri |>
   labs(x = "Year", y = "Number of Reports", col = "Form Type")
 ```
 
-### Facilities Reporting Emissions One Year and No Emissions the Following Year
+#### Facilities Reporting Emissions One Year and No Emissions the Following Year
 
 ```{r}
 #| df_print: paged
@@ -252,6 +285,36 @@ rmarkdown::paged_table(tri |>
   arrange(desc(abs(diff_from_prev))))
 ```
 
+## Day Two
 
+### Mapping Data Resources
+
++------------------------------+-----------------------------------------------------------------------+------------------------------+-----------------------------------------------+----------------------------------------------------+
+| Data Resource                | List a Resource pertaining to your Fieldsite                          | Who mobilizes this resource? | Towards what ends is this resource mobilized? | How effective is this resource in enacting change? |
++==============================+=======================================================================+==============================+===============================================+====================================================+
+| Definitions                  | (example: "facility")                                                 |                              |                                               |                                                    |
++------------------------------+-----------------------------------------------------------------------+------------------------------+-----------------------------------------------+----------------------------------------------------+
+| Classification Systems       | (example: International Classification of Diseases)                   |                              |                                               |                                                    |
++------------------------------+-----------------------------------------------------------------------+------------------------------+-----------------------------------------------+----------------------------------------------------+
+| Measurement Standards        | (example: Body Mass Index)                                            |                              |                                               |                                                    |
++------------------------------+-----------------------------------------------------------------------+------------------------------+-----------------------------------------------+----------------------------------------------------+
+| Counts                       | (example: traffic count)                                              |                              |                                               |                                                    |
++------------------------------+-----------------------------------------------------------------------+------------------------------+-----------------------------------------------+----------------------------------------------------+
+| Datasets                     | (example: toxic release inventory)                                    |                              |                                               |                                                    |
++------------------------------+-----------------------------------------------------------------------+------------------------------+-----------------------------------------------+----------------------------------------------------+
+| Statistical statements       | (example: "In the U.S. women make .82 on the dollar compared to men") |                              |                                               |                                                    |
++------------------------------+-----------------------------------------------------------------------+------------------------------+-----------------------------------------------+----------------------------------------------------+
+| Data plots or visualizations | (example: some bar plot)                                              |                              |                                               |                                                    |
++------------------------------+-----------------------------------------------------------------------+------------------------------+-----------------------------------------------+----------------------------------------------------+
+| Maps                         |                                                                       |                              |                                               |                                                    |
++------------------------------+-----------------------------------------------------------------------+------------------------------+-----------------------------------------------+----------------------------------------------------+
+| Performance metric/target    | (example: CompStat)                                                   |                              |                                               |                                                    |
++------------------------------+-----------------------------------------------------------------------+------------------------------+-----------------------------------------------+----------------------------------------------------+
+| Data models                  | (example: climate model)                                              |                              |                                               |                                                    |
++------------------------------+-----------------------------------------------------------------------+------------------------------+-----------------------------------------------+----------------------------------------------------+
+| Algorithms                   |                                                                       |                              |                                               |                                                    |
++------------------------------+-----------------------------------------------------------------------+------------------------------+-----------------------------------------------+----------------------------------------------------+
+| Indexes                      | (example: global poverty index)                                       |                              |                                               |                                                    |
++------------------------------+-----------------------------------------------------------------------+------------------------------+-----------------------------------------------+----------------------------------------------------+
 
 

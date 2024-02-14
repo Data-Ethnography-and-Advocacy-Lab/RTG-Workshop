@@ -354,3 +354,15 @@ rmarkdown::paged_table(tri |>
     -   How does data disrupt/catalyze/corrode/stabilize action?
 
     -   Where is data missing?
+    
+### Annotate a Data Artifact
+
+-   Navigate to the data artifact
+-   Click 'Annotate'
+-   Select a structured analytic
+    -   Querying Data Ideologies
+    -   Querying Datasets
+    -   Querying Data Journeys
+-   Select a question
+-   Compose a response and give it a descriptive title
+-   Save

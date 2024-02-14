@@ -1,0 +1,45 @@
+---
+title: "pfas_map"
+format: html
+editor: source
+---
+
+```{r}
+library(tidyverse)
+library(sf)
+library(leaflet)
+library(RColorBrewer)
+
+pfas <- read.csv("maps/data/expert_dataset.csv")
+```
+
+## Convert to spatial object
+
+```{r}
+pfas_sf <-
+  pfas  %>%
+  st_as_sf(coords = c("lon", "lat"), crs = 4326)
+```
+
+## Create Map
+
+```{r}
+pal_cat <- colorFactor(palette = c("Set2"), 
+                        domain = pfas_sf |> 
+                         st_drop_geometry() |> 
+                         select(category) |> 
+                         distinct() |> 
+                         pull())
+
+pfas_map <- leaflet() %>%
+  setView(lat =52, lng = 10, zoom = 3) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addCircleMarkers(data = pfas_sf,
+                   radius = 2, 
+                   weight = 0, 
+                   fillColor = ~pal_cat(category), 
+                   fillOpacity = 0.2)
+
+pfas_map
+```
+

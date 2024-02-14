@@ -343,4 +343,14 @@ rmarkdown::paged_table(tri |>
 | Eco         | Environment/Climate                        |                                                    |
 +-------------+--------------------------------------------+----------------------------------------------------+
 
+### Animating Data Projects
 
+-   How does data "fix futures" in your project?
+
+    -   How is data legitimized?
+
+    -   How is data contested?
+
+    -   How does data disrupt/catalyze/corrode/stabilize action?
+
+    -   Where is data missing?

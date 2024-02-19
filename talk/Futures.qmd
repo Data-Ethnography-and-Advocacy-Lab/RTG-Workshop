@@ -1,0 +1,956 @@
+---
+title: "Fixing Accountability"
+subtitle: "Data Context and the Concentration of Explanatory Power"
+author: |
+  Lindsay Poirier<br/>
+  </span>
+  <span style = 'font-size: 70%;'>
+  [Statistical & Data Sciences](http://www.smith.edu/sds), Smith College<br/>
+date: |
+  February 19, 2024<br/>
+format: 
+  revealjs:
+    scrollable: true
+    df-print: paged
+    theme: [default]
+    chalkboard:
+      theme: whiteboard
+      boardmarker-width: 5
+editor: source
+execute:
+  echo: false
+  messages: false
+  warnings: false
+---
+
+
+
+## {background-image="https://upload.wikimedia.org/wikipedia/commons/4/44/Seroquel_100_25.jpg?20100124071440"}
+
+:::{.notes}
+-   2002: University of Cincinnati researcher named Melissa DelBello 
+-   conducted a study concluding that an **atypical antipsychotic** produced by AstraZeneca (known as Seroquel)
+-   effective in treating adolescent bipolar mania. 
+:::
+
+
+---
+
+## {background-image="img/guidelines.png" background-size="600px"}
+
+:::{.notes}
+-   2005: panel of experts singled out study
+-   became the basis for medical guidelines 
+-   recommended the prescription of atypicals to treat bipolar children. 
+
+-   more than half of the participants in the drug's trial dropped out due to the drug’s negative side effects.
+-   research article argued for the drug’s effectiveness.
+-   … but even she suggested that the results were inconclusive in a 2002 interview. 
+
+:::
+
+---
+
+## {background-image="img/nyt.png" background-size="400px"}
+
+:::{.notes}
+
+-   eventually came under the scrutiny of New York Times investigative reporting. 
+-   2007, NYT published article discussing impact of this type of drug on children with bipolar mania. 
+-   journalists uncovered that 3/4 of expert panelists paid speaker or consultancy fees by atypical drugmakers.
+-   DelBello hired by AstraZeneca to give sponsored talks
+-   separately paid by 8 different drug companies, including 5 manufacturers of atypical drugs.
+:::
+
+---
+
+# "Trust me, I don't make much."
+
+:::{.notes}
+-   NYT reported how much DelBello earned from the University of Cincinnati, 
+-   when asked how much she was earning from drug manufacturers, she responded, “Trust me, I don’t make much.”
+-   published when payments coming under federal scrutiny
+-   Medicare and Medicaid make up 1/4 of the federal budget 
+-   largest payer of pharmaceuticals in the country
+-   addressing bipartisan issue. 
+-   Republican Senator Chuck Grassley, was at the time serving as the head of the Senate Finance Committee and brought on Paul Thacker as a Lead Investigator. 
+
+-   Thacker reached out to DelBello's university department chair requesting copies of the conflict of interest forms she had filed with the University. 
+
+-   uncovered that DelBello collected 100s of 1000s from AstraZeneca - money that went unreported in the published scientific studies. 
+
+:::
+
+---
+
+## {background-image="img/grassley.png" background-size="600px"}
+
+:::{.notes}
+-   2008: Chuck Grassley narrated story before Congress
+-   introduced a bill called the Physician Payments Sunshine Act
+-   require that pharma companies and medical device manufacturersreport the amounts of money they had paid to physicians in a public database. 
+-   similar legislation passed in states, but this federal
+-   Grassley went on to state, “This bill is not aimed at stopping money flowing to the doctors. …. But it ought to throw a little sunshine on this issue. And that sunshine shown on this issue, I think, will go a long way toward curbing bad behavior” .
+
+:::
+
+
+---
+
+## {background-image="img/op.png" background-size="800px"}
+
+:::{.notes}
+-   bill passed as part of the United States Affordable Care Act
+-   navigate to OP look up my U.S. doctor 
+-   how much money they have accepted from pharma
+-   what that money was for, how it was paid out, and any drugs that it was associated with.
+:::
+
+---
+
+
+## Timeline of Food & Beverage Payments to 1 MA Doctor in 2022
+
+```{r}
+#| echo: false
+library(tidyverse)
+library(lubridate)
+data <- read.csv("data/data.csv") |>
+    select(covered_recipient_npi,
+         covered_recipient_first_name:covered_recipient_last_name,
+         applicable_manufacturer_or_applicable_gpo_making_payment_id,
+         applicable_manufacturer_or_applicable_gpo_making_payment_name,
+         recipient_city,
+         recipient_state,
+         covered_recipient_specialty_1,
+         total_amount_of_payment_usdollars,
+         indicate_drug_or_biological_or_device_or_medical_supply_1,
+         product_category_or_therapeutic_area_1,
+         name_of_drug_or_biological_or_device_or_medical_supply_1,
+         date_of_payment,
+         nature_of_payment_or_transfer_of_value,
+         number_of_payments_included_in_total_amount,
+         form_of_payment_or_transfer_of_value,
+         dispute_status_for_publication,
+         payment_publication_date, 
+         contextual_information,
+         third_party_payment_recipient_indicator,
+         name_of_third_party_entity_receiving_payment_or_transfer_of_ccfc) |>
+    mutate(covered_recipient_first_name = toupper(covered_recipient_first_name), 
+         covered_recipient_last_name = toupper(covered_recipient_last_name), 
+         date_of_payment = mdy(date_of_payment))
+
+most_meals_ma_2022 <-
+  data |>
+  filter(nature_of_payment_or_transfer_of_value == "Food and Beverage") |>
+  group_by(covered_recipient_npi, covered_recipient_first_name, covered_recipient_last_name) |>
+  summarize(count = n(), 
+            total = sum(total_amount_of_payment_usdollars)) |>
+  ungroup() |>
+  arrange(desc(count)) |>
+  slice(1:5)
+
+data |>
+    filter(covered_recipient_npi == 1902065543 &
+             nature_of_payment_or_transfer_of_value == "Food and Beverage") |>
+    ggplot(aes(x = day(date_of_payment), 
+               y = "", 
+               fill = total_amount_of_payment_usdollars)) +
+    geom_jitter(pch = 21, size = 2, color = "black", alpha = 0.75, width = 0) +
+    theme_minimal() +
+    labs(y = "", 
+         x = "Day",
+         fill = "Payment Amount") +
+    scale_y_discrete(limits = rev) +
+    scale_fill_distiller(palette = "BuPu", direction = 1, labels = scales::comma) +
+    facet_wrap(vars(month(date_of_payment, label = TRUE)), nrow = 4) 
+
+```
+
+
+
+::: {.notes}
+
+-   MA doctor that accepted the most “Food and Beverage” payments in 2022 in MA 
+-   403 food and beverage payments
+-   up until 2012, MA prohibited pharma and device companies from paying doctors meals at all. 
+-   2012 amendments allowed for “modest meals” outside of hospital settings to provide doctors with information about certain drugs or devices during meals so as not to pull them away from patient time.
+-   five days of the year where more than 15 food and beverage payments were reported on a single day. 
+:::
+
+---
+
+## Aims and Overview
+
+-   Examine how datasets are composed to "fix accountability"
+  -   How beliefs about the promises of transparency become inscribed into datasets
+  -   How stakeholders "fix meaning-making" through data's narrative form
+  -   How concerns over data "context" get mobilized in the process
+  
+:::{.notes}
+
+-   examine how datasets get **configured to “fix accountable futures”** through advocacy and discursive action. I aim to 
+-   show how **beliefs about the promises** of transparency become **inscribed in the material-semiotic form** of datasets. 
+-   examine what this means for efforts to “fix accountability” 
+-   stakeholders seek to **“fix meaning-making”** around accountable practices through **data composition**
+-   fix futures where data interpreters draw certain kinds of conclusions from published data. 
+-   how mobilized in relation to OP
+
+:::
+  
+------------------------------------------------------------------------
+
+# Cultural Analysis of Datasets
+
+:::{.notes}
+-   Data as system of signs
+-   defining feature of dataset is that they structure sign system
+-   data have narrative form
+-   privilege certain stories over others through ordering obs, selecting vari, dividing cat, policing def, and discerning what counts as context
+:::
+
+------------------------------------------------------------------------
+
+
+## Dataset Narrative Form
+
+-   "Tidy" datasets are often understood to be "rectangular."
+
+![](https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png)
+
+Grolemund, Garrett, and Hadley Wickham. n.d. R for Data Science. Accessed March 31, 2019. https://r4ds.had.co.nz/.
+
+:::{.notes}
+-   data analysis systems (such as Excel, R, and Stata) designed w/ the presumption that most datasets will be “rectangular” 
+-   Data scientists spend much of their time wrangling messy datasets to make them “tidy” (new row/new column)
+-  qual values in datasets are restricted to “controlled vocabularies” 
+-   quant values in datasets inscribed according to standards
+-   published w/ “contextual information” that frame their contents. 
+-   all shape how meaning is drawn from data
+-   data can be written in divergent ways 
+-   stakeholders craft datasets with speculative visions of future interpretation and data outcomes. 
+:::
+
+------------------------------------------------------------------------
+
+## Material-Semiotics of Data
+
+-   "Raw data are an oxymoron" (Bowker 2005)
+-   Data are not "given" but "captured" (Drucker 2011)
+-   Data are "mutable" (Bates et al. 2016)
+
+**How are data narrated in the inscriptive phases of data generation?**
+
+
+:::{.notes}
+
+-   affirm scholarship 
+-   mutable, not static, transform as they move between sites of practice and use. 
+-   do not intrinsically reveal stories, but must be narrated
+-   data storytelling is one way communities make data actionable. 
+-   extend to demonstrate not only how data gets narrated in interpretive phases, but also in inscriptive phases 
+-   in the phases where people are deciding the dataset’s narrative form.
+-   when they are deciding how data will be configured and presented to the world.
+
+:::
+
+------------------------------------------------------------------------
+
+
+::: columns
+::: {.column width="33%"}
+![](img/writing.jpg)
+:::
+
+::: {.column width="33%"}
+![](img/anthro.jpg)
+:::
+::: {.column width="33%"}
+![](img/meta.jpg)
+:::
+:::
+
+
+:::{.notes}
+-   work in tradition of cul anth in which literary theory and ethnography are often fused
+-   narrative forms of cultural texts are of central concern. 
+-   mid-1970s: attention to language structures, tropes, and genres of key cultural texts. 
+-   historian and literary critic Hayden White analyzed how verbal structures employed in writing of historical work shaped their broader narratives and arguments, constituting contemporary historical knowledge according to classical tropes of irony, tragedy, and so on.
+-   Post-colonial scholars deconstructed key cultural texts, highlighting role of language in shaping colonial power and in rendering certain populations speechless
+-   showed how history and culture were not only reflected in texts, but were also constituted through their narrative form. 
+
+
+:::
+
+------------------------------------------------------------------------
+
+
+## Reading Datasets
+
+-   Inspired by critical hermeneutics of digital infrastructure:
+    -   Code (Marino 2006)
+    -   Databases (Dourish 2014; Feinberg 2017)
+    -   Infrastructure (Star 1999)
+    -   Algorithms (Burrell 2016; Mackenzie 2017; Seaver 2017)
+    -   Machine Learning (Kockelman 2020)
+-   Contributes to literature documenting the "genealogies of datasets" (Denton 2020) and ethnographies of data infrastructure (Ribes 2013; Biruk 2018) 
+
+:::{.notes}
+- approach work inspired by academic sub-fields have been applying critical hermeneutics to the interpretation of various forms of digital infrastructure. 
+
+-   "code as a text, as a sign system with its own rhetoric"; close reading of digital code
+
+-  scholarship reframes components of digital infrastructures 
+-   not only functional tools for holding information, but also as iterating cultural artifacts, privileging certain symbolic orders over others. 
+
+-   also the case w/ datasets
+
+-   echo a growing contingent of scholars calling for new modes of “data criticism” (Beaton 2016), the study of “dataset genealogies” (Denton et al. 2020), the tracing of critical histories of repurposed data (Radin 2017), and the narrating of data stories (Bouk 2022). 
+-   literary criticism to datasets.
+:::
+
+
+------------------------------------------------------------------------
+
+# Empirical Focus: Disclosure Datasets
+
+:::{.notes}
+-   OP disclosure dataset
+-   tabular datasets produced in accordance with laws requiring various kinds of disclosure. 
+-   laws requiring disclosure emerged alongside FOIL and growing concerns over responsibility 
+:::
+
+------------------------------------------------------------------------
+
+## Third Wave of Modern Risk Regulation
+
+::: columns
+
+::: {.column width="50%"}
+-  1960s-70s: Freedom of Information or Sunshine Laws passed in the U.S.
+-   1970-90s: Laws requiring corporate disclosure resulted in public databases
+-   2000s: Databases published online as open government data
+:::
+
+::: {.column width="50%"}
+
+![](https://www.foia.gov/img/foia-doj-logo.svg)
+:::
+:::
+
+:::{.notes}
+
+-   Mary Graham: disclosure as “the third wave of modern risk regulation.”
+-   predates open government movements in the late 2000s and early 2010s. 
+-   Freedom of Information Laws, or “sunshine laws” that mandate openness in public decision-making
+    -   open meetings and records
+    -   in place in certain countries around the world for centuries
+    -   in certain U.S. states since the early 1900s 
+-   1967 FOIA 
+    -   following U.S. Watergate scandal, 
+    -   public support for governmental transparency prompted the passing of the Government in the Sunshine Act of 1976, 
+    -   opening of all government meetings, except for those that might result in the disclosure of sensitive or protected information. 
+
+-   Successive amendments to FOIA have responded to changes in social and judicial environments. 
+-   1960s and 1970s, laws were passed in the U.S. requiring corporations to disclose information to regulators and concerned publics about their practices. 
+-   1975: HMDA - concern over unfair lending practices were contributing to the decline of urban communities, 
+    -   1989: Financial Institutions Reform, Recovery, and Enforcement Act amended require that data on applicant and borrower characteristics be collected and disclosed in order to monitor discriminatory lending. 
+-   EPCRKA passed in response to 1984 Union Carbide gas leak incident in Bhopal, India,
+    -   mandates disclosure of info about hazardous materials and toxic emissions present in communities 
+
+-   2000s: open data movements set the agenda for publishing government information as structured datasets.     -   Sunlight Foundation and the Open Knowledge Foundation: publish machine-readable. 
+-   first day in office in 2009, successive executive orders signed by former U.S. President Barack Obama regarding the opening of government datasets 
+-   culminated in his signing of the “Open Data Policy” - an Executive Order to make machine-readable open data the default for all government information
+-   2018: Open Data Policy codified into law w/ the passing of the Open, Public, Electronic, and Necessary (OPEN) Government Data Act. 
+-   now many disclosure datasets accessible for download in standardized, tabular formats from open government data portals and agency websites. 
+
+:::
+
+------------------------------------------------------------------------
+
+## What is the goal of disclosure?
+
+-   Citizen "right-to-know"?
+-   Change corrupt business practices?
+-   Encourage citizens to self-organize boycotts?
+-   Generate empirical evidence of wrong-doing?
+
+:::{.notes}
+
+-   generally understood as contributing to social good
+-   purpose subject of much debate. 
+-   Do we publish the data because citizens have a “right-to-know” about the goings-on in government and business? 
+-   Do we publish the data because we believe doing so will actually change corrupt governing or business practices? 
+-   Do we publish the data because we believe citizens will self-organize around boycotting certain actors that have been revealed as “bad actors”? 
+-   Or do we publish the data in efforts to generate empirical evidence of wrong-doing - as a first step towards pursuing further regulation? 
+
+-   seem concert with one another
+-   explain how disclosure data programs have been able to gain bipartisan support in the United States. 
+-   progressive: foreground greedy or discriminatory business practices
+    -   first step towards oversight and regulation
+-   when treated as an end in and of itself: advance a neoliberal agenda 
+    -   diffuse responsibility of public oversight from regulators to citizens. 
+    -   why some remain ambivalent
+
+:::
+
+---
+
+## Disclosure Datasets
+
+::: columns
+::: {.column width="50%"}
+
+> Tabular datasets that aggregate information produced and reported by the same institutions they are meant to hold accountable.
+
+:::
+
+::: {.column width="50%"}
+-   Self-disclosure concerns:
+
+    -   "Juking the stats" (policing)
+
+    -   "Cooking the books" (campaign finance)
+
+    -   "Phantom reductions" (environmental monitoring)
+
+
+:::
+:::
+
+:::{.notes}
+
+-   aggregate information produced and reported by the same institutions they are meant to hold accountable
+-   can lead to adverse actions - either formal or informal -- taken against the reporting institutions. -    institutionally incentivize misreporting and deceptive accounting practices. 
+-   juke stats example
+-   campaign finance example
+-   environment emissions example
+
+-   deceptive accounting not area I'm looking at 
+
+-   aim to show how inscribed to secure certain interpretive outcomes - to fix meaning-making and accountability
+
+:::
+------------------------------------------------------------------------
+
+## Open Payments, 2010-2013
+
+::: {.r-stack}
+
+![](img/aca.jpg){.fragment}
+
+![](img/agenda.png){.fragment}
+
+![](img/reg.png){.fragment}
+
+![](img/cspan.png){.fragment}
+
+:::
+
+> ACA image by Marco Verch
+
+:::{.notes}
+
+- hone in on a particular moment OP history. :after legislation but before final rule
+-   leg did not outline all of specifics regarding how the data would be collected, structured, and presented to the public. 
+-   gave responsibility CMS
+-   must do in collaboration with stakeholder groups .
+-   both public and private in-person stakeholder meetings collecting feedback 
+-   proposed drafted on Reg.gov: 300 comments
+-   Senate committees: televised roundtables where stakeholders debated how the dataset should be structured. -   recordings available because of sunshine laws 
+
+-   conflicts in vision on promise of transparency
+-   conflicts shaped configurations and presentations of the data
+-   inscribed into narrative form
+
+:::
+
+------------------------------------------------------------------------
+
+::: columns
+
+::: {.column width="50%"}
+
+### Failing to exclude research payments would have "deleterious effects on the research enterprise in the United States." (Peddicord, 2012)
+
+:::
+
+::: {.column width="50%"}
+
+![](img/peddicord.png)
+
+:::
+
+:::
+
+
+:::{.notes}
+
+-   industry groups: data may be “misinterpreted” by the public. 
+-   wrapped in sunshine: consumers default to assigning a negative connotation to every data point documenting a payment 
+-   slow medical innovation and delivery of patient care. 
+
+-   Doug Peddicord, Executive Director, Association of Clinical Research Organizations
+-   2002: professional organization that represents clinical research organizations and technology companies by advocating on behalf of innovation in biomedical product development to regulators and policymakers
+-   involved with half of all worldwide clinical trials.
+-   referenced 2010 survey of physicians: 24% of physicians would be less likely to participate in medical research if their gross revenues from clinical trials were to be made public. 
+-   failing to exclude research payments from reporting would have “deleterious effects on the research enterprise in the United States.” 
+
+
+:::
+
+------------------------------------------------------------------------
+
+::: columns
+
+::: {.column width="50%"}
+
+### "...the most destructive aspect of Sunshine is its flawed premise that every payment presents a conflict of interest." (ACRE, 2010)
+
+:::
+
+::: {.column width="50%"}
+
+![](img/acre.png)
+
+:::
+:::
+
+:::{.notes}
+
+-   Association of Clinical Researchers and Educators (ACRE)
+-   a nonprofit organization founded by Thomas Stossel, an oncologist and Professor at the Harvard Medical School
+-   ACRE website highlighted condemnation of the “anti-industry movement” in the medical profession
+-   long-term goal of: “revers[ing] policies instituted curtailing or minimizing interaction between industry and physicians, educators and researchers” (ACRE, 2010)
+
+> Finally, the most destructive aspect of Sunshine is its flawed premise that every payment presents a conflict of interest. The fact is that payment information can serve either good or bad purposes. The “good” outcome “sunshine” advocates claim is that “transparency” will rein in medical care costs based on the absolutely unproven and arguably false premise that industry payments to physicians drive overprescribing of unnecessary and overly expensive brands. (ACRE Steering Committee, 2012: 3)
+
+Manufacturers and orgs: reporting harm research enterprise, advancement of sci, and patient care by discouraging medical innovation and fostering distrust in medical industries, 
+-   ethical problem with epistemic roots : lack of context
+-   letter went on no judgments without “context”:
+ 
+> How these data are to be taken in the context of analyzing scientific research is unknown and merely will serve the interests of fascinated individuals (certainly not patients or researchers). Without context, these data cannot be interpreted; intentionality, influence, alleged corruption and causality cannot be defined by the data alone. (ACRE Steering Committee, 2012: 4)
+
+:::
+
+------------------------------------------------------------------------
+
+
+::: columns
+::: {.column width="50%"}
+
+### "At [Eli] Lilly, we believe that physician payment transparency, when done accurately and with relevant context, is good for all stakeholders." (Elizabeth O'Farrell 2012)
+
+:::
+
+::: {.column width="50%"}
+
+![](img/farrell.png)
+
+:::
+:::
+
+:::{.notes}
+
+-   context cast as prerequisite to transparency. 
+-   Eli Lilly comments 
+-   letter from Medtronic 
+
+> We believe having all manufacturers share information in a standard manner will better educate patients and the public on the role of industry-physician collaboration, improve the public trust, discourage inappropriate payments and transfers of value, and ultimately ensure that appropriate collaborations can continue to benefit patients. These shared goals require that such relationships are properly explained in their full context. (Schumacher, 2012)
+ 
+-   emphasized commitments by referring to payment disclosure programs 
+-   voluntarily initiated in the late 2000s
+
+
+:::
+
+------------------------------------------------------------------------
+
+## {background-image="img/lilly.png" background-size="600px"}
+
+:::{.notes}
+
+-   referenced Internet Archive captures of earlier versions of their websites
+-   found under sections celebrating “corporate responsibility” 
+-   industry-physician relationships essential to the development of new treatments 
+-   cited examples of medical innovations that emerged as a result of industry-physician relationships 
+-   comments to CMS - this is context 
+
+
+:::
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="25%"}
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Eli_Lilly_and_Company.svg/500px-Eli_Lilly_and_Company.svg.png)
+
+![](https://upload.wikimedia.org/wikipedia/de/thumb/8/8d/GlaxoSmithKline-Logo.svg/1150px-GlaxoSmithKline-Logo.svg.png?20061227230650)
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Merck-logousa.svg/1052px-Merck-logousa.svg.png)
+
+:::
+
+::: {.column width="25%"}
+
+![](https://upload.wikimedia.org/wikipedia/de/thumb/2/24/Medtronic_Logo.svg/2560px-Medtronic_Logo.svg.png)
+![](https://upload.wikimedia.org/wikipedia/de/thumb/a/a5/Cephalon-logo.svg/1230px-Cephalon-logo.svg.png?20080902101807)
+
+![](https://unchivcurecenter.org/wp-content/uploads/sites/13692/2019/01/ViiV-Healthcare-logo.jpg)
+
+:::
+::: {.column width="25%"}
+
+![](https://upload.wikimedia.org/wikipedia/de/thumb/e/ee/AstraZeneca_logo.svg/1598px-AstraZeneca_logo.svg.png?20191024083958)
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Pfizer_%282021%29.svg/500px-Pfizer_%282021%29.svg.png)
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Zimmer_Holdings_logo.svg/1600px-Zimmer_Holdings_logo.svg.png)
+
+:::
+::: {.column width="25%"}
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Johnson_and_Johnson_Logo.svg/1600px-Johnson_and_Johnson_Logo.svg.png)
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Allergan_plc.svg/1024px-Allergan_plc.svg.png)
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Novartis-Logo.svg/1024px-Novartis-Logo.svg.png)
+
+![](https://upload.wikimedia.org/wikipedia/en/e/e7/Ortho_McNeil_logo.png)
+
+:::
+:::
+
+:::{.notes}
+
+-   w/in one year: DOJ investigations into cases of healthcare fraud --> legal settlements that mandated the companies to publicly report payments to doctors. 
+-   2007 and 2012, >12 companies (including several of the largest medical manufacturers in the U.S.) similar
+-   celebrate corporate responsibility, commitments to transparency, and how the companies adhere to the “highest standards of conduct” when it comes to industry-physician relationships 
+-   publishing payments indicative of their ethical business practices; 
+-   physicians were paid fair-market values for their time and expertise in the development of medical advancements. 
+-   language recast the negative connotations data consumers might assign to payment data in a positive and even promotional light. 
+-   took advantage of mutability of transparency
+ 
+
+
+:::
+
+---
+
+## Transparency-Washing
+
+-   Prioritizing transparency to strengthen brand while detracting from larger concerns (Zalnieriute 2011)
+-   Commitments to transparency as "lip service"
+-   Transparency can turning responsibility for oversight onto consumers
+-   Transparency can be a means of advancing self-regulation
+
+:::{.notes}
+
+-   Monika Zalnieriute (2021): “transparency-washing”
+-   companies prioritize the ideal of transparency in order to strengthen their brand, while detracting attention from substantive ethical issues towards smaller scale procedural issues. 
+-   “lip service”: identified their own ambivalences about the effectiveness of transparency programs. 
+-   Niall Brennan, former Chief Data Officer: divided along party lines
+-   transparency initiatives embody a liberal governmentality; 
+    -   corporations can evade reg: responsibility for oversight pushed onto a citizenry 
+    -   newly expected to review public info and make consumer-based decisions in alignment with their values and priorities. 
+
+-   labeling context became transparency-washing tactic. 
+-   had criticized interpretation driven by false or misleading premises - context remedy 
+-   referring to context presented language as objective and disinterested --> aimed at truth conclusions not ideological conclusions 
+-   ignored situated perspectives producing context 
+-   calls often suggested leaving to industries and physicians
+
+:::
+
+---
+
+### "CMS should monitor entries and consider withdrawing this field if it is being used inappropriately by applicable manufacturers to editorialize on matters such as the perceived value of industry-provider relationships, particularly *given that there would be no comparable opportunity for comments from other points of view*." (Hams, 2012: 10)
+
+:::{.notes}
+
+-   all generally agreed context important
+-   patient and consumer advocacy organizations (underrepresented)
+-   skepticism over context appropriation 
+-   Marcia Hams, the Director of the **Prescription Access and Quality at Community Catalyst**
+    -  national nonprofit organization focused on affordable health care access. 
+-   Submit contextual info with reservations
+ 
+> While this information could be helpful to patients, providers and the public, CMS should monitor entries and consider withdrawing this field if it is being used inappropriately by applicable manufacturers to editorialize on matters such as the perceived value of industry-provider relationships, particularly given that there would be no comparable opportunity for comments from other points of view. (Hams, 2012: 10)
+
+-   both advocating for and critiquing: efforts to fix the centers of meaning-making in relation to the published data.
+-   fixing: 
+    -   secure, the center of meaning-making with the same actors the data was (at least originally) meant to hold accountable.
+    -   fix, or repair, potentially biased meaning-making practices by asking CMS to monitor
+
+
+:::
+
+---
+
+## Fixing Definitions
+
+### What is ...
+
+::: columns
+::: {.column width="33%"}
+
+a physician? 
+
+a manufacturer?
+
+a drug?
+
+:::
+
+::: {.column width="33%"}
+
+a conflict?
+
+a payment?
+
+a speaker fee?
+
+:::
+::: {.column width="33%"}
+
+research?
+
+continuing education?
+
+a meal?
+
+:::
+
+:::
+
+:::{.notes}
+
+-   subversive advocacy around contextual perspective
+-   calls to bring context through info infra 
+-   calls to standardize definitions and clearly demarcate categories for payments.
+-   stated goal to promote consistency in reporting
+-   community groups: data would be more meaningful to the public when standardized. 
+-    appeared to be advocating for fixing the center of mean-making through certain information infrastructures.
+-   standards often considered neutral; exonerates actors from blame 
+-   effaced judgments always animating infra
+-   definitions in fact hotly debated 
+-   politics eclipsed as displaced onto info infra
+
+
+:::
+
+------------------------------------------------------------------------
+
+## {background-image="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Centers_for_Medicare_and_Medicaid_Services_logo.svg/706px-Centers_for_Medicare_and_Medicaid_Services_logo.svg.png" background-size="400px"}
+
+:::{.notes}
+
+What happened?
+
+-   noted that they would  “accurately and completely” describe the nature of relationships between physicians and industries on their website. 
+-   also “to reduce the promotional or company specific information on the Web site” 
+-   specific language focused more on what payments did not indicate than what they did indicate.
+
+-   agreed context was a prerequisite to transparency.
+-   agreed that transparency was not necessarily about discerning corrupt from legitimate business practices
+-   not necessarily about promoting trust in the medical industry. 
+-   avoid coming across as passing value judgments on the data’s meaning and significance. 
+-   context to nullify preconceived judgments 
+
+
+:::
+
+---
+
+## {background-image="img/op.png" background-size="800px"}
+
+:::{.notes}
+
+-   strategic branding decisions 
+-   Center for Program Integrity (CPI) 
+-   Shantanu Agrawal, a former emergency room doctor who later shifted careers towards health policy, 
+    -   Deputy Administrator for CPI 
+-   rebrand the program as “Open Payments” in an effort to shift away from the framing of the data as a “disinfectant.” 
+ 
+> We wanted it to be about transparency. And we wanted it to be clear about what it was. We didn't want to continue with this underlying notion that it was intrinsically corrupt. And so we emphasize openness and transparency.
+
+-   reframe the underlying premises consumers might bring to data interpretation
+-   not to promote certain interpretations as correct
+-   open further interpretive possibilities
+-   synonymous with openness: context into a different kind of remedy—not preventing wrong conclusions and more preventing singular ones.
+
+:::
+
+---
+
+## {background-image="img/context.png" background-size="800px"}
+
+:::{.notes}
+
+-   more on what data doesn't mean
+-   pages describing how the reporting program works, guidelines for data use, glossaries, frequently asked questions, and an interactive data report generator
+-   “Open Payments Data in Context” 
+
+> “Open Payments does not identify which financial relationships are beneficial or which may cause conflicts of interest.” 
+
+> “Open Payments means different things to different people and audiences” 
+
+-   talk to doctors 
+
+-   “CMS has an impartial role in Open Payments,” noting that they were responsible only for collecting and publishing information. 
+
+-   context as crafting neutral meaning-making space
+
+
+:::
+
+---
+
+# "...if you put a hard line, people are going to find a way around it."
+
+:::{.notes}
+
+-   reservations about definitions 
+    -   encode definitions that make senators mad
+    -   not everything figured out; didn't want to have to go back and do again 
+    -   concerns about taking advantage to find loophols. One individual noted that “if you put a hard line, people are going to find a way around it.”
+
+
+:::
+
+---
+
+```{r}
+#| rownames.print: false
+
+cont <- data |>
+  filter(contextual_information != "" & !is.na(contextual_information)) |>
+  select(contextual_information) |>
+  distinct() |>
+  tail()
+
+cont
+```
+
+:::{.notes}
+
+-   arch decisions: describing the nature of the payments while enabling consumers to draw their own interpretations from the data.
+-   Agrawal about how he was thinking about “context”:  decisions made in relation to the program’s website: displaying character-delimited transaction-level contextual information reported by manufacturers
+
+:::
+
+---
+
+## {background-image="img/research.png" background-size="400px"}
+
+:::{.notes}
+
+segmenting the data such that research payments would be displayed in a separate database from general payments;
+
+:::
+
+---
+
+## Building out Analytic Tools for Comparison
+
+::: columns
+
+::: {.column width="50%"}
+![](img/comp1.png)
+:::
+
+::: {.column width="50%"}
+![](img/comp.png)
+:::
+
+:::
+
+:::{.notes}
+
+building out analytic capabilities so that users could make year-to-year and geographic comparisons;
+
+:::
+
+---
+
+## {background-image="img/disclaimer.png" background-size="400px"}
+
+:::{.notes}
+
+including language warning users against jumping to conclusions on what the data means and doesn’t mean. In this enactment, context (understood to be implicitly designed into the website’s information architecture) would not determine interpretation, but could facilitate it.
+
+
+:::
+
+---
+
+# Conclusions 
+
+::: {.incremental}
+-   "Context" can be deployed towards fixing interpretive outcomes
+-   A "tyranny of light" is that it can become a means of concealment
+-   Critical scholars of data should attend to the narrative forms of datasets
+:::
+
+:::{.notes}
+
+-   context became a means of at times controlling (and at other times relinquishing control over) the frames of reference from which data would be assigned meaning. 
+-   numbers could not and should not speak for themselves, -   differed in their articulations and justifications around who or what should speak for numbers
+    -   around where meaning should originate. 
+    
+-   Critical theorists: both the contradictions and consequences of attempts to fix centers of meaning-making,
+    -   centered structures both enable and delimit free-play in signification 
+    -   stakeholders positioned themselves along this paradox, 
+    -   tightening and loosening the centering structures governing meaning-making.
+    -   determining interpretation and at other times a means of facilitating interpretation.
+
+-   deemed as making transparency possible - of bringing sunshine to physician payments. 
+-   Light, Haridimos Tsoukas (1997): metaphor for knowledge since the enlightenment, marking an increased ability to see. 
+-   Transparency: tenet of modern information societies—societies 
+-   “tyrannies of light”: surplus of information may obscure what it is meant to represent.
+-   opportunities to misrepresent multiply when info is serving as surrogate 
+-   context: regulates these spaces of menaing-making 
+-   further capacity to eclipse
+-   evade perceptions of judgment and open interpretive possibilities: deregulate these meaning-making spaces, in the process propagating possible meanings that could be assigned to data.
+-   both enactments of context, the visibility of information can establish the conditions of possibility for concealment (Strathern, 2000). 
+-   When deployed to explain away what is made visible through transparency initiatives or in refusal of assigning judgment to data, context can multiply opportunities for misrepresentation. 
+
+This is why it is so critical to attend to the narrative forms of datasets. While discourse suggesting data to be self-evident can certainly be traced through headlines, marketing campaigns, and materials produced by major funding organizations, focusing exclusively on these examples as representative of dominant data epistemologies eclipses other, seemingly contrasting but equally dominating, portrayals of data. Since I started this manuscript, I’ve seen discourse around data ‘context’ weaponized to impede data sharing in a number of communities. Raising concerns over the inclusion of “mining” in the categories U.S. industrial emitters are required to report to the public, companies have expressed concern that the public will take the data out of context (Cray, 2000). Providing testimony on their views on data management, the U.S. International Association of Chiefs of Police cited the risks of sharing data with the public noting that, taken out of context, the data could be misleading (Task Force on 21st Century Policing, 2015). Many business groups oppose pay transparency initiatives in California, citing concerns that the data will be taken out of context (Gedye, 2022). In the case of Open Payments, not only was data context deemed a priority by some of the most powerful data stakeholders; it was also strategically operationalized by certain stakeholders to re-situate explanatory power over the data’s significance. Attending to the advocacy that shapes the narrative forms of databases demonstrates how datasets are deployed, not only to document practices, but also to fix data interpretation, to fix data-based meaning-making, and to fix accountability. 
+
+
+:::
+
+---
+
+## Thank you!
+
+::: columns
+
+::: {.column width="70%"}
+
+> **Dr. Lindsay Poirier**
+>
+> Statistical & Data Sciences, Smith College
+>
+> lpoirier\@smith.edu
+
+
+:::
+
+
+::: {.column width="30%"}
+
+```{r}
+sds::img_logo(width = 300)
+```
+
+
+:::
+
+:::
+
+::: callout-note
+## Acknowledgements
+
+Thanks are due to the Fall 2022 and Spring 2023 cohort of the Smith College *Data Ethnography and Advocacy Lab*, including Anika Arifin, Juniper Huang, Naomi Liftman, Mags McLaughlin, Nicole Tresvalles, Quinn White, Ziqi Zhen. 
+:::
